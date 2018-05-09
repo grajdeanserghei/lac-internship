@@ -1,0 +1,28 @@
+
+<div class="message">
+  <input type="file" (change)="onFileSelected($event)" />
+  {{status}}
+  <img src="{{image}}" />
+  <img src="{{image}}" />
+  <img src="{{image}}" />
+  <div *ngIf="selectedFile">
+    <div>
+      <button (click)="onCallApi()">Call API ML</button>
+    </div>
+    <div *ngIf="googleResponse">
+      <h2>Google response</h2>
+      <p>
+        {{googleResponse}}
+      </p>
+    </div>
+    <div *ngIf="azureResponse">
+      <h2>Azure response</h2>
+      <p>
+        {{azureResponse}}
+      </p>
+    </div>
+  </div>
+  <div *ngFor="let item of demoList">
+    <p>{{item}}</p>
+  </div>
+</div>

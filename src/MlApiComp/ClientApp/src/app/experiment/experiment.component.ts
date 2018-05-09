@@ -12,6 +12,8 @@ export class ExperimentComponent implements OnInit {
   experiment: Experiment = new Experiment;
   newExperiment: Experiment = new Experiment;
 
+  name: string;
+
   constructor(
     private expService: ExperimentService
   ) { }
@@ -20,12 +22,6 @@ export class ExperimentComponent implements OnInit {
   }
 
   onSubmit() {
-    let form = <HTMLFormElement>document.getElementById('create-form');
-    this.experiment.name = (<HTMLInputElement>document.getElementById('ExperimentName')).value;
-    this.experiment.executorName = (<HTMLInputElement>document.getElementById("ExecutorName")).value;
-    this.experiment.eventDate = new Date((<HTMLInputElement>document.getElementById('Date')).valueAsDate);
-    this.experiment.cost = (<HTMLInputElement>document.getElementById("Cost")).valueAsNumber;
-
     this.expService.createExperiment(this.experiment)
     .subscribe( data => {
       this.newExperiment.cost = data.cost;

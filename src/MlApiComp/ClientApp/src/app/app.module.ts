@@ -19,13 +19,15 @@ import { AzureImageService } from './services/azure-image.service';
 import { GoogleImageService } from './services/google-image.service';
 import { MlComponent } from './ml/ml.component'
 import { MlService } from './services/ml.service';
+import { MlDemoComponent } from './ml-demo/ml-demo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ExperimentComponent,
-    MlComponent
+    MlComponent,
+    MlDemoComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -39,7 +41,8 @@ import { MlService } from './services/ml.service';
     RouterModule.forRoot([
       { path: 'experiments/create', component: ExperimentComponent, pathMatch: 'full' },
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'imgAnalysis', component: MlComponent, pathMatch: 'full' }
+      { path: 'imgAnalysis', component: MlComponent, pathMatch: 'full' },
+      { path: 'demo-ml', component: MlDemoComponent, pathMatch: 'full' }
     ])
   ],
   providers: [
