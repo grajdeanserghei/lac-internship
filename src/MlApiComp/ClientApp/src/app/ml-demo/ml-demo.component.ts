@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { read } from 'fs';
 import { MlService } from '../services/ml.service';
 
 
