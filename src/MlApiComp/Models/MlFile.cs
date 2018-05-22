@@ -10,5 +10,7 @@ namespace MlApiComp.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public byte[] Content { get; set; }
+        public string AzureApiResult { get; set; }
+        public string GoogleApiResult { get; set; }
     }
 }

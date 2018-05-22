@@ -11,9 +11,10 @@ using System;
 namespace MlApiComp.Migrations
 {
     [DbContext(typeof(MlContext))]
-    partial class MlContextModelSnapshot : ModelSnapshot
+    [Migration("20180522192318_AddedAzureApiAndGoogleApiResponseColumns")]
+    partial class AddedAzureApiAndGoogleApiResponseColumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
