@@ -61,7 +61,6 @@ export class MlComponent {
   persistImageInformation() {
     this.fileUploadService.putFile(this.file)
       .subscribe(data => {
-        this.file = data;
       }, error => {
         console.log(error);
       });
