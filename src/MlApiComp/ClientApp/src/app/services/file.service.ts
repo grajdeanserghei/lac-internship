@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs/Observable";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { MlFile } from '../models/MlFile';
 import 'rxjs/Rx';
 
 @Injectable()
@@ -13,16 +14,33 @@ export class FileService {
     this.baseUrl = 'http://localhost:62528/api/file';
   }
 
-  postFile(fileToUpload: File): Observable<boolean> {
-    const endpoint = this.baseUrl;
+  postFile(fileToUpload: File): Observable<any> {
     const formData: FormData = new FormData();
-    var headers = null;
+    
     formData.append('file', fileToUpload, fileToUpload.name);
     return this.httpClient
-      .post(endpoint, formData, { headers: headers })
+      .post(this.baseUrl, formData)
+      .map((data) => { debugger; return data; })
+      .catch((err: HttpErrorResponse) => {
+        console.error('An error occurred:', err.error);
+        return Observable.empty<any>();
+      });
+  }
+
+  putFile(file: MlFile): Observable<any> {
+    var endpoint = this.baseUrl + '/' + file.id;
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.httpClient
+      .put(endpoint, file, httpOptions)
       .map(() => { return true; })
       .catch((err: HttpErrorResponse) => {
         console.error('An error occurred:', err.error);
+        return Observable.empty<any>();
       });
   }
 }
