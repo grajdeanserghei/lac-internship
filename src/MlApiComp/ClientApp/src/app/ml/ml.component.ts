@@ -3,6 +3,8 @@ import { environment } from '../../environments/environment';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MlService } from '../services/ml.service';
+import { FileService } from '../services/file.service';
+import { MlFile } from '../models/MlFile';
 
 @Component({
   selector: 'app-ml',
@@ -14,26 +16,55 @@ export class MlComponent {
   previewPath: string;
   googleApiResponse: string;
   azureApiResponse: string;
-  file: Blob;
+  fileUpload: File;
+  file: MlFile;
 
-  constructor(private mlservice: MlService) { }
+  constructor(private mlservice: MlService, private fileUploadService: FileService) { }
 
   onFileSelected(event) {
 
-    this.file = event.target.files[0];
+    this.fileUpload = event.target.files[0];
     let reader = new FileReader();
     reader.onload = (e: any) => {
       this.previewPath = e.target.result;
     }
+    debugger;
+    this.uploadFileToDatabase();
 
-    reader.readAsDataURL(this.file);
+    reader.readAsDataURL(this.fileUpload);
+  }
+
+  uploadFileToDatabase() {
+    this.fileUploadService.postFile(this.fileUpload)
+      .subscribe(data => {
+        this.file = data;
+      }, error => {
+        console.log(error);
+      });
   }
 
   getImageInformation() {
-    this.mlservice.predictGoogle(this.file)
-      .subscribe(x => this.googleApiResponse = x);
+    this.mlservice.predictGoogle(this.fileUpload)
+      .subscribe(data => {
+        this.googleApiResponse = data;
+        this.file.googleApiResult = data;
+        this.persistImageInformation();
+      });
 
-    this.mlservice.predictAzure(this.file)
-      .subscribe(x => this.azureApiResponse = x);
+    this.mlservice.predictAzure(this.fileUpload)
+      .subscribe(data => {
+        this.azureApiResponse = data;
+        this.file.azureApiResult = data;
+        this.persistImageInformation();
+      });
+  }
+
+  persistImageInformation() {
+    this.fileUploadService.putFile(this.file)
+      .subscribe(data => {
+        this.file = data;
+      }, error => {
+        console.log(error);
+      });
   }
 }

@@ -43,10 +43,10 @@ export class MlDemoComponent implements OnInit {
   }
 
   onCallApi() {
-    this.service.predictGoogle(this.selectedFile)
+    this.service.predictGoogle(<File>this.selectedFile)
       .subscribe(response => this.googleResponse = response);
 
-    this.service.predictAzure(this.selectedFile)
+    this.service.predictAzure(<File>this.selectedFile)
       .subscribe(response => this.azureResponse = response);
   }
 }

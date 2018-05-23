@@ -12,7 +12,7 @@ export class MlService {
   constructor(private azure: AzureImageService,
     private google: GoogleImageService) { }
 
-  predictGoogle(image: Blob): Observable<string> {
+  predictGoogle(image: File): Observable<string> {
     let reader = new FileReader();
     let base46Image = '';
 
@@ -25,7 +25,7 @@ export class MlService {
     return result.switch();
   }
 
-  predictAzure(image: Blob): Observable<string> {
+  predictAzure(image: File): Observable<string> {
     let reader = new FileReader();
     let base46Image = '';
 
