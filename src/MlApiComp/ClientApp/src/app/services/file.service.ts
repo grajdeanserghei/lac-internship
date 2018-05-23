@@ -20,7 +20,7 @@ export class FileService {
     formData.append('file', fileToUpload, fileToUpload.name);
     return this.httpClient
       .post(this.baseUrl, formData)
-      .map((data) => { debugger; return data; })
+      .map((data) => { return data; })
       .catch((err: HttpErrorResponse) => {
         console.error('An error occurred:', err.error);
         return Observable.empty<any>();

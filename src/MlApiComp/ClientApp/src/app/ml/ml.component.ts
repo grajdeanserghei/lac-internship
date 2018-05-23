@@ -28,7 +28,6 @@ export class MlComponent {
     reader.onload = (e: any) => {
       this.previewPath = e.target.result;
     }
-    debugger;
     this.uploadFileToDatabase();
 
     reader.readAsDataURL(this.fileUpload);
