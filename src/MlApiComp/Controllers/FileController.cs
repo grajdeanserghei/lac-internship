@@ -21,7 +21,7 @@ namespace MlApiComp.Controllers
             this.dbContext = dbContext;
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             var file = dbContext.Files.Find(id);
@@ -30,6 +30,12 @@ namespace MlApiComp.Controllers
                 return NotFound("File does not exist!!"); 
             }
             return Ok(file);
+        }
+
+        [HttpGet]
+        public IList<MlFile> GetAll()
+        {
+            return dbContext.Files.ToList();
         }
 
         [HttpPost]
@@ -54,6 +60,43 @@ namespace MlApiComp.Controllers
                     return Created(fileUri, fileModel);
                 }
             }
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody] MlFile file)
+        {
+            if (file == null || file.Id != id)
+            {
+                return BadRequest();
+            }
+
+            var existingFile = dbContext.Files.Find(id);
+            if (existingFile == null)
+            {
+                return NotFound();
+            }
+
+            existingFile.AzureApiResult = file.AzureApiResult;
+            existingFile.GoogleApiResult = file.GoogleApiResult;
+            existingFile.Name = file.Name;
+
+            dbContext.Files.Update(existingFile);
+            dbContext.SaveChanges();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var file = dbContext.Files.Find(id);
+            if (file == null)
+            {
+                return NotFound();
+            }
+
+            dbContext.Files.Remove(file);
+            dbContext.SaveChanges();
+            return NoContent();
         }
     }
 }
