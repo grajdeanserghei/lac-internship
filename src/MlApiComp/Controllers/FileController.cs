@@ -53,7 +53,7 @@ namespace MlApiComp.Controllers
                     fileStream.CopyTo(memoryStream);
                     var fileModel = new MlFile();
                     fileModel.Content = memoryStream.ToArray();
-                    fileModel.Name = file.Name;
+                    fileModel.Name = file.FileName;
                     dbContext.Add(fileModel);
                     dbContext.SaveChanges();
                     var fileUri = this.Url.Action(nameof(FilesController.Get), new { id = fileModel.Id });

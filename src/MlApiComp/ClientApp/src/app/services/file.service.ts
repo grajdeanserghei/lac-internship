@@ -43,4 +43,14 @@ export class FileService {
         return Observable.empty<any>();
       });
   }
+
+  getAll(): Observable<any> {
+    return this.httpClient
+      .get(this.baseUrl)
+      .map((data) => { return data; })
+      .catch((err: HttpErrorResponse) => {
+        console.error('An error occurred:', err.error);
+        return Observable.empty<any>();
+      });
+  }
 }

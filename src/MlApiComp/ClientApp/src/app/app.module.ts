@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
@@ -21,6 +22,7 @@ import { MlComponent } from './ml/ml.component'
 import { MlService } from './services/ml.service';
 import { MlDemoComponent } from './ml-demo/ml-demo.component';
 import { FileService } from './services/file.service';
+import { MlGridComponent } from './ml-grid/ml-grid.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { FileService } from './services/file.service';
     HomeComponent,
     ExperimentComponent,
     MlComponent,
-    MlDemoComponent
+    MlDemoComponent,
+    MlGridComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -38,12 +41,14 @@ import { FileService } from './services/file.service';
     MatButtonModule,
     MatCheckboxModule,
     MatCardModule,
+    MatGridListModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([
       { path: 'experiments/create', component: ExperimentComponent, pathMatch: 'full' },
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'imgAnalysis', component: MlComponent, pathMatch: 'full' },
-      { path: 'demo-ml', component: MlDemoComponent, pathMatch: 'full' }
+      { path: 'demo-ml', component: MlDemoComponent, pathMatch: 'full' },
+      { path: 'ml-grid', component: MlGridComponent, pathMatch: 'full' }
     ])
   ],
   providers: [
