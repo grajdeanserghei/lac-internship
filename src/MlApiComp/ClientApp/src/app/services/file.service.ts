@@ -44,10 +44,10 @@ export class FileService {
       });
   }
 
-  getAll(): Observable<any> {
+  getAll(): Observable<MlFile[]> {
     return this.httpClient
       .get(this.baseUrl)
-      .map((data) => { return data; })
+      .map((data) => {  return data; })
       .catch((err: HttpErrorResponse) => {
         console.error('An error occurred:', err.error);
         return Observable.empty<any>();

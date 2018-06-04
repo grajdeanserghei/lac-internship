@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MlApiComp.Migrations
 {
-    public partial class test : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,9 @@ namespace MlApiComp.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AzureApiResult = table.Column<string>(nullable: true),
                     Content = table.Column<byte[]>(nullable: true),
+                    GoogleApiResult = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

@@ -11,8 +11,8 @@ using System;
 namespace MlApiComp.Migrations
 {
     [DbContext(typeof(MlContext))]
-    [Migration("20180516124527_test")]
-    partial class test
+    [Migration("20180529205312_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,7 +26,11 @@ namespace MlApiComp.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("AzureApiResult");
+
                     b.Property<byte[]>("Content");
+
+                    b.Property<string>("GoogleApiResult");
 
                     b.Property<string>("Name");
 
