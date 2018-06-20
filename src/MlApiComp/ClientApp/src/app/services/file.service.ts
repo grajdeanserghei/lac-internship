@@ -11,7 +11,7 @@ export class FileService {
   baseUrl: string;
 
   constructor(private httpClient: HttpClient) {
-    this.baseUrl = 'http://localhost:62528/api/file';
+    this.baseUrl = '/api/file';
   }
 
   postFile(fileToUpload: File): Observable<any> {
