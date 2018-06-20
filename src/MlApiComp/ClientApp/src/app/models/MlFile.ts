@@ -4,4 +4,5 @@ export class MlFile {
   content: File;
   azureApiResult: string;
   googleApiResult: string;
+  imagePath: string;
 }
